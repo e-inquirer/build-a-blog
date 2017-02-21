@@ -5,3 +5,6 @@ __pycache__/
 # Swap files
 *.swp
 
+# Emacs generated files
+\#*
+.#*
