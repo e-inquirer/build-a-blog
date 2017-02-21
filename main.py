@@ -22,35 +22,47 @@ class Art(db.Model):
     art = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
 
-class MainPage(Handler):
+#class MainPage(Handler):
+#    def render_front(self, title="", art="", error=""):
+#        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
+#
+#        self.render("front.html", title=title, art=art, error=error, arts=arts)
+#
+#    def get(self):
+#        #self.render("front.html")
+#        self.render_front()
+#
+#    def post(self):
+#        title = self.request.get("title")
+#        art = self.request.get("art")
+#
+#        if title and art:
+#            #self.write("Thanks!")
+#            a = Art(title = title, art = art)
+#            a.put()
+#
+#            self.redirect("/")
+#
+#        else:
+#            error = "we need both, a title and some Artwork!"
+#            self.render_front(title, art, error)
+
+class Blog(Handler):
     def render_front(self, title="", art="", error=""):
         arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
 
-        self.render("front.html", title=title, art=art, error=error, arts=arts)
+        self.render("blog.html", title=title, art=art, error=error, arts=arts)
 
     def get(self):
         #self.render("front.html")
         self.render_front()
 
-    def post(self):
-        title = self.request.get("title")
-        art = self.request.get("art")
+#class NewPost():
 
-        if title and art:
-            #self.write("Thanks!")
-            a = Art(title = title, art = art)
-            a.put()
-
-            self.redirect("/")
-
-        else:
-            error = "we need both, a title and some Artwork!"
-            self.render_front(title, art, error)
 
 # Route handlers
 app = webapp2.WSGIApplication([
-    ('/', MainPage)
+#    ('/', MainPage)
     ('/blog', Blog)
-    ('/blog/newpost', NewPost)
+#    ('/blog/newpost', NewPost)
 ], debug=True)
-
