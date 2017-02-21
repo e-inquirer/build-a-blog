@@ -46,8 +46,11 @@ class MainPage(Handler):
         else:
             error = "we need both, a title and some Artwork!"
             self.render_front(title, art, error)
-            
+
+# Route handlers
 app = webapp2.WSGIApplication([
     ('/', MainPage)
+    ('/blog', Blog)
+    ('/blog/newpost', NewPost)
 ], debug=True)
 
