@@ -62,7 +62,11 @@ class NewPost(Handler):
 class ViewPostHandler(Handler):
     def get(self, id):
         post = Art.get_by_id(int(id))
-        self.render("single_post.html", title=post.title, art=post.art)
+
+        if post:
+            self.render("single_post.html", title=post.title, art=post.art)
+        else:
+            self.response.write("Sorry, but there is no post associated with that ID.")
         
         
 # Route handlers
