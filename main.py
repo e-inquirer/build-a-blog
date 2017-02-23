@@ -36,17 +36,13 @@ class Blog(Handler):
         self.render("blog.html", title=title, art=art, error=error, arts=arts)
 
     def get(self):
-        #self.render("front.html")
         self.render_front()
 
 class NewPost(Handler):
     def render_front(self, title="", art="", error=""):
-#        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
-
         self.render("newpost.html", title=title, art=art, error=error)
 
     def get(self):
-        #self.render("front.html")
         self.render_front()
             
     def post(self):
@@ -54,7 +50,6 @@ class NewPost(Handler):
         art = self.request.get("art")
 
         if title and art:
-            #self.write("Thanks!")
             a = Art(title = title, art = art)
             a.put()
 
@@ -63,8 +58,8 @@ class NewPost(Handler):
         else:
             error = "we need both, a title and some Artwork!"
             self.render_front(title, art, error)
-#            self.render(title, art, error)
 
+            
 # Route handlers
 app = webapp2.WSGIApplication([
     ('/', MainPage),
