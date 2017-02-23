@@ -1,4 +1,7 @@
-import webapp2, jinja2, os
+import webapp2
+import jinja2
+import os
+
 from google.appengine.ext import db
 
 # set up jinja2
@@ -22,8 +25,9 @@ class Art(db.Model):
     art = db.TextProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
 
-#class MainPage(Handler):
-
+class MainPage(Handler):
+    def get(self):
+        self.redirect("/blog")
 
 class Blog(Handler):
     def render_front(self, title="", art="", error=""):
@@ -63,7 +67,7 @@ class NewPost(Handler):
 
 # Route handlers
 app = webapp2.WSGIApplication([
-#    ('/', MainPage)
+    ('/', MainPage),
     ('/blog', Blog),
     ('/newpost', NewPost)
 ], debug=True)
