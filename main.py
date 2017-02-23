@@ -59,10 +59,15 @@ class NewPost(Handler):
             error = "we need both, a title and some Artwork!"
             self.render_front(title, art, error)
 
-            
+class ViewPostHandler(webapp2.RequestHandler):
+    def get(self, id):
+        pass #replace this with some code to handle the request
+
+
 # Route handlers
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/blog', Blog),
-    ('/newpost', NewPost)
+    ('/newpost', NewPost),
+    webapp2.Route('/blog/<id:\d+>', ViewPostHandler)
 ], debug=True)
