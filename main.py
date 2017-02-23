@@ -30,9 +30,10 @@ class MainPage(Handler):
         self.redirect("/blog")
 
 class Blog(Handler):
-    def render_front(self, title="", art="", error=""):
+    def render_front(self, title="", art=""):
         arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 5")
-        self.render("blog.html", title=title, art=art, error=error, arts=arts)
+
+        self.render("blog.html", title=title, art=art, arts=arts)
 
     def get(self):
         self.render_front()
