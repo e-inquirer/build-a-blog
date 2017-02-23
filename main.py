@@ -61,7 +61,7 @@ class NewPost(Handler):
 
 class ViewPostHandler(webapp2.RequestHandler):
     def get(self, id):
-        pass #replace this with some code to handle the request
+        self.response.write(id)
 
 
 # Route handlers
