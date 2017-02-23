@@ -27,7 +27,7 @@ class Art(db.Model):
 
 class Blog(Handler):
     def render_front(self, title="", art="", error=""):
-        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
+        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 5")
 
         self.render("blog.html", title=title, art=art, error=error, arts=arts)
 
