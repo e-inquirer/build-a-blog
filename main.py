@@ -32,7 +32,6 @@ class MainPage(Handler):
 class Blog(Handler):
     def render_front(self, title="", art="", error=""):
         arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC LIMIT 5")
-
         self.render("blog.html", title=title, art=art, error=error, arts=arts)
 
     def get(self):
@@ -53,7 +52,9 @@ class NewPost(Handler):
             a = Art(title = title, art = art)
             a.put()
 
-            self.redirect("/blog")
+            permalinkID = a.key().id()
+            permalink = "/blog/" + str(permalinkID)
+            self.redirect(permalink)
 
         else:
             error = "we need both, a title and some Artwork!"
