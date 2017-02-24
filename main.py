@@ -1,6 +1,7 @@
 import webapp2
 import jinja2
 import os
+import cgi
 
 from google.appengine.ext import db
 
@@ -49,8 +50,11 @@ class NewPost(Handler):
         title = self.request.get("title")
         art = self.request.get("art")
 
+        title_escaped = cgi.escape(title, quote=True)
+        art_escaped = cgi.escape(art, quote=True)
+        
         if title and art:
-            a = Art(title = title, art = art)
+            a = Art(title = title_escaped, art = art_escaped)
             a.put()
 
             permalinkID = a.key().id()
